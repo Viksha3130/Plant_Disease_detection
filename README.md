@@ -9,6 +9,7 @@ Inception-v3 is a convolutional neural network that is 48 layers deep with Incep
 
 1) Train the model (pd.ipynb) using Colaboratory which offers Free Gpu for Training.
 2) save the model with .h5 extension
+3) Import plantdiseasedetection SQL file in Mysql using Xamp server
 
 ## Run
 1) Install the required Packages
