@@ -1,0 +1,130 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Plant Disease Detection</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">  
+<script>
+$(document).ready(function(){
+  load_data();
+  function load_data(query)
+  {
+   $.ajax({
+    url:"/ajaxlivesearch",
+    method:"POST",
+    data:{query:query},
+    success:function(data)
+    {
+      $('#remedy').html(data);
+      $("#remedy").append(data.htmlresponse);
+    }
+   });
+  }
+  $('#search_text').keyup(function(){
+    var search = $(this).val();
+    if(search != ''){
+    load_data(search);
+   }else{
+    load_data();
+   }
+  });
+});
+</script>	
+<style type="text/css">
+#slider {
+	overflow:hidden;
+}
+#slider figure {
+	position:relative;
+	margin:0;
+	left:0;
+	animation: 10s slider infinite;
+	width:500%;
+}
+#slider figure img{
+width:20%;
+float:left;
+}
+
+@keyframes slider{
+0%{
+left:0;
+}
+20%{
+left:0;
+}
+25%{
+left:-100%;}
+45%{
+left:-100%;}
+
+
+}
+</style>	
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+			<a class="navbar-brand" href="#"><img  width="50px" height="50px" src ="https://play-lh.googleusercontent.com/sp87xMJJyibQl9nWfOWmNXZeVJGS1ax1y-9NV3FIfFw8nmBrfqL-5qAe21e1cD529dQ"> 
+			<span style="margin-left:10px;">Plant Disease Detection</span></a>
+
+		 	</div>
+			
+        </div>
+	</div>
+    </nav>
+	<!--<div style="border-style:solid; margin-top:2rem;border-width:thin; border-color:#F0F3F4; border-radius: 25px; background:#F0F3F4;  margin-left:20%; margin-right:20%;  ">
+	<a href="/objectdetection">
+	<button  class="btn success" style="margin-left:10%; margin-top:2%; width:30%; height:5%; background:#1ABC9C; color:#fff; margin-bottom:2%" >Object_Detection</button></a>
+	<form method="post" enctype=multipart/form-data style="float:right;">
+	          <input type="file" name="file"/>
+	          <input type="submit"/>
+	          </form>
+	</div>-->
+	
+	
+	<input type="text" name="search_text" id="search_text"value="" class="form-control" placeholder="Search" style="width:300px; margin-left:75%; margin-top:15px; ">
+    <div class="container" style="border-style:solid; margin-top:2rem;border-width:thin; border-color:#F0F3F4; border-radius: 25px;">
+	   <div class="row">
+	       <div class="col-6" style="background:#F0F3F4; border-radius: 25px; ">
+              <div id="slider"  >
+		        <figure>
+		          <img   width="530px" height="550px" src ="https://dmtyylqvwgyxw.cloudfront.net/instances/132/uploads/images/custom_image/image/38249/transformed_leaf_disease_detection_using_image_processing1.jpg?v=1556776994">
+		            <img   width="530px" height="550px" src ="https://media.springernature.com/lw685/springer-static/image/art%3A10.1007%2Fs42360-020-00290-3/MediaObjects/42360_2020_290_Fig1_HTML.png">
+    	
+		         </figure>
+		      </div>
+		    </div>
+			
+		         <div class="col-6" style="margin-top:2em;">
+                   <div id="content">{% block content %}{% endblock %}</div>
+					</div>
+					
+		         </div>
+               </div>
+			   <div class="container">
+			   <div style="border-style:solid; margin-top:2rem;border-width:thin; border-color:#F0F3F4; border-radius: 25px; background:#F0F3F4;  margin-bottom:2%;">
+			 <button id="setValue" class="btn success" style="margin-left:30%; margin-top:2%; width:30%; height:5%; background:#1ABC9C; color:#fff; margin-bottom:2%" >REMEDY</button>
+			 </div>
+				 <div id="remedy" ></div>
+				
+				 </div>
+</body>
+
+<footer>
+<script> $("#setValue").click(function(event){
+$('#search_text').val(document.getElementById("result").innerHTML);
+});</script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" type="text/javascript"></script>    
+</footer>
+
+</html>
